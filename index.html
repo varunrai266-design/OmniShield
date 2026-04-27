@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniShield AI | Advanced Threat Detection</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="app-container">
+        <header class="glass-panel">
+            <div class="logo">
+                <span style="font-size: 2rem;">🛡️</span>
+                <h1>OmniShield<span class="highlight">.AI</span></h1>
+            </div>
+            <nav>
+                <button class="nav-btn active" id="nav-text">Text & SMS Scanner</button>
+                <button class="nav-btn" id="nav-url">URL & Link Scanner</button>
+            </nav>
+        </header>
+
+        <main>
+            <section class="glass-panel main-scanner">
+                <h2 id="scanner-title">Analyze Text Communications</h2>
+                <p id="scanner-desc">Check if a message is safe before you reply.</p>
+                
+                <div class="input-group">
+                    <textarea id="scan-input" placeholder="Paste the SMS, WhatsApp message, or Email here..."></textarea>
+                </div>
+                
+                <button id="scan-btn" class="primary-btn">
+                    <span class="btn-text">Run Security Scan</span>
+                    <span class="loader hidden"></span>
+                </button>
+            </section>
+
+            <section class="glass-panel results-panel hidden" id="results-panel">
+                <div class="result-header">
+                    <h3>Analysis Complete</h3>
+                    <div id="threat-badge" class="badge">Processing...</div>
+                </div>
+                
+                <div class="metric-grid">
+                    <div class="metric-card glass-panel-inner">
+                        <span class="metric-label">Confidence Score</span>
+                        <span class="metric-value" id="confidence-score">--%</span>
+                    </div>
+                    <div class="metric-card glass-panel-inner">
+                        <span class="metric-label">Threat Category</span>
+                        <span class="metric-value" id="threat-type" style="font-size: 1.2rem; margin-top: 0.6rem;">--</span>
+                    </div>
+                </div>
+
+                <div class="explanation-box">
+                    <h4>AI Explanation</h4>
+                    <p id="ai-explanation">Waiting for analysis...</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
