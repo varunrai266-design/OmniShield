@@ -1,40 +1,79 @@
-# EduApply - College Application Portal
+# OmniShield AI
 
-A visually stunning, fully functional frontend web application for a fictional university ("Crestwood University"). This project allows prospective students to explore the college, learn about programs, and submit a fully validated multi-step application form.
+OmniShield AI is an advanced threat detection application designed to safeguard users against phishing, social engineering, and malicious links. It provides an intuitive interface to scan SMS messages, emails, and URLs, returning a comprehensive analysis including threat category, confidence score, and a clear explanation.
 
-## 🚀 Technologies Used
+## Features
 
-This project is built to be a simple, highly-performant, single-page application using pure standard web technologies without the need for heavy frameworks.
+*   **Text & SMS Scanner**: Analyzes text communications (SMS, WhatsApp, Emails) for signs of phishing and social engineering like urgent language or suspicious requests.
+*   **URL & Link Scanner**: Evaluates URLs to flag potential malicious domains or phishing links, considering factors like domain age.
+*   **Clear Insights**: Provides a confidence score, threat categorization (e.g., Safe, Critical Threat), and an AI-generated explanation for the verdict.
+*   **History Logging**: (Optional) Analyzes are saved to a Firestore database for record-keeping and further review.
 
-*   **HTML5:** Semantic structure emphasizing accessibility and multi-step form layout.
-*   **Vanilla CSS3:** 
-    *   No external CSS frameworks (like Tailwind or Bootstrap) were used.
-    *   Makes extensive use of CSS variables for theming (`--primary-navy`, `--accent-gold`, etc.).
-    *   Flexbox and Grid layouts employed for fully responsive design on all screen sizes.
-    *   CSS Keyframes used for smooth scroll effects, hover-states, and fade-in animations on scroll.
-*   **Vanilla JavaScript (ES6+):**
-    *   **Form Logic & Validation:** End-to-end multi-step form navigation with strict field validation before moving between steps.
-    *   **Local Storage:** Temporarily saves form text input draft states utilizing `localStorage`.
-    *   **DOM Manipulation & Observers:** `IntersectionObserver` used for animated statistics counter and fade-in triggers. Filtering system created for the Programs gallery and a dynamic accordion created for the FAQs.
+## Tech Stack
 
-## 🎨 Resources & Assets Used
+*   **Backend**: Python, FastAPI
+*   **Frontend**: HTML, CSS (Vanilla), JavaScript
+*   **Database**: Firebase Firestore (for storing scan logs)
 
-*   **Typography:** Google Fonts ([Playfair Display](https://fonts.google.com/specimen/Playfair+Display) for headings, [DM Sans](https://fonts.google.com/specimen/DM+Sans) for body text).
-*   **Icons:** [Lucide Icons](https://lucide.dev/) (via CDN) for lightweight, clean SVG iconography.
-*   **Images:** Unsplash for placeholder campus photography.
+## Project Structure
 
-## 📁 File Structure
+```
+omnishield/
+├── backend/
+│   ├── main.py       # FastAPI application and endpoints
+│   ├── models.py     # Pydantic models for request/response validation
+│   └── db.py         # Firestore database connection (assumed)
+└── frontend/
+    ├── index.html    # Main UI
+    ├── styles.css    # Styling for the application (Glassmorphism UI)
+    └── app.js        # Frontend logic and API integration
+```
 
-The project maintains a clean separation of concerns:
+## Getting Started
 
-*   `index.html` - The main structure containing the navigation, hero, about, programs grid, admissions timeline, campus life, form, and footer.
-*   `style.css` - All styling, responsive media queries, UI/UX interaction visual states, and animation.
-*   `script.js` - Client-side state logic, smooth scrolling behaviors, number animations, filtering, form progression logic, and success confetti modal.
+### Prerequisites
 
-## ⚙️ How to Run
+*   Python 3.8+
+*   FastAPI & Uvicorn
+*   Firebase Admin SDK (if using Firestore logging)
 
-Because this project uses vanilla web technologies and handles logic client-side, no local server or backend configuration is required:
+### Installation & Setup
 
-1.  Simply grab the project directory.
-2.  Open `index.html` in any modern web browser (Edge, Chrome, Firefox, Safari).
-3.  Scroll through the site and try out the multi-step form in the "Apply" section.
+1.  **Clone the repository** (or navigate to the project directory):
+    ```bash
+    cd omnishield/backend
+    ```
+
+2.  **Install backend dependencies**:
+    ```bash
+    pip install fastapi uvicorn pydantic firebase-admin
+    ```
+    *(Note: Ensure you have `db.py` configured correctly with your Firebase service account credentials if you want to use the database logging feature.)*
+
+3.  **Run the FastAPI backend**:
+    ```bash
+    uvicorn main:app --reload
+    ```
+    The API will be available at `http://127.0.0.1:8000`.
+
+4.  **Run the Frontend**:
+    Simply open `frontend/index.html` in your web browser. Or, you can serve it using a simple HTTP server:
+    ```bash
+    cd ../frontend
+    python -m http.server 8080
+    ```
+    Then visit `http://localhost:8080` in your browser.
+
+## API Endpoints
+
+*   `GET /`: Health check endpoint.
+*   `POST /scan/text`: Accepts `{"text": "...", "channel": "SMS"}` and returns text threat analysis.
+*   `POST /scan/url`: Accepts `{"url": "..."}` and returns URL threat analysis.
+
+## Disclaimer
+
+The current backend implementation contains mock AI response logic to save API credits during development. It uses keyword matching (e.g., "urgent", "bank account", "free", "claim") to determine threat levels. For a production environment, this should be replaced with a real ML model or third-party AI integration.
+
+
+<img width="1875" height="859" alt="image" src="https://github.com/user-attachments/assets/aea5475b-79f8-43a4-b6f9-4cd2cd07fc9e" />
+
